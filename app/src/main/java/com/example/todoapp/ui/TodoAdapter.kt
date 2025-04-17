@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.todoapp.data.Todo
 import com.example.todoapp.databinding.TodoItemBinding
 
-class TodoAdapter(private val Oncheck: (Todo) -> Unit,
+class TodoAdapter(private val onCheck: (Todo) -> Unit,
     private  val onLongPress: (Todo) -> Unit
 ): RecyclerView.Adapter<TodoAdapter.TodoViewHolder>() {
 
@@ -19,7 +19,7 @@ class TodoAdapter(private val Oncheck: (Todo) -> Unit,
             binding.tvDescription.text = todo.description
             binding.cbDone.isChecked = todo.isDone
             binding.cbDone.setOnCheckedChangeListener {
-                _, _ ->Oncheck(todo.copy(isDone = !todo.isDone))
+                _, _ ->onCheck(todo.copy(isDone = !todo.isDone))
             }
             binding.root.setOnLongClickListener {
                 onLongPress(todo); true

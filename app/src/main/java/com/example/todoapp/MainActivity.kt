@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
 
         val adapter = TodoAdapter(
             onCheck = { viewModel.update(it) },
-            onLongPress = { todo -> viewModel.delete(todo) }
+            onLongPress = { todo -> viewModel.delete(todo) },
         )
 
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity() {
         val addLauncher = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
         ) { result ->
-            if (result.resultCode == Activity.RESULT_OK) {
+            if (result.resultCode == RESULT_OK) {
                 val newTodo = result.data?.getParcelableExtra<Todo>("todo")
                 newTodo?.let { viewModel.insert(it) }
             }

@@ -5,11 +5,9 @@ import androidx.room.Dao
 import androidx.room.*
 
 @Dao
-class TodoDao {
-    @Query("SELECT * FROM todo_table ORDER BY id DESC")
-    fun getAllTodos(): LiveData<List<Todo>> {
-        return TODO("Provide the return value")
-    }
+interface TodoDao {
+    @Query("SELECT * FROM todo_table ORDER BY id ASC")
+    fun getAllTodos(): LiveData<List<Todo>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(todo: Todo) {}
