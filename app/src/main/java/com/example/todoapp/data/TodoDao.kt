@@ -6,7 +6,7 @@ import androidx.room.*
 
 @Dao
 interface TodoDao {
-    @Query("SELECT * FROM todo_table ORDER BY id ASC")
+    @Query("SELECT * FROM todo_table ORDER BY id ASC LIMIT 100")
     fun getAllTodos(): LiveData<List<Todo>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

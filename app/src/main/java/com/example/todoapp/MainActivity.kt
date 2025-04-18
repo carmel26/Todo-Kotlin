@@ -23,6 +23,7 @@ package com.example.todoapp
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -52,6 +53,17 @@ class MainActivity : AppCompatActivity() {
 
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
         binding.recyclerView.adapter = adapter
+
+        viewModel.allTodos.observe(this) { todos ->
+            if (!todos.isNullOrEmpty()) {
+                Log.d("MainActivity", "Todos size: ${todos.size}")
+                adapter.submitList(todos)
+            } else {
+                Log.d("MainActivity", "No todos to display.")
+                adapter.submitList(emptyList()) // Or don't submit anything if you prefer
+            }
+        }
+
 
         viewModel.allTodos.observe(this) { adapter.submitList(it) }
 

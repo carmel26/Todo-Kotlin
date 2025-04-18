@@ -12,13 +12,11 @@ import kotlinx.coroutines.launch
 class TodoViewModel(app: Application) : AndroidViewModel(app) {
     private val repo: TodoRepository
     val allTodos: LiveData<List<Todo>>
-        get() {
-             return  allTodos
-        }
 
     init {
         val dao = TodoDatabase.getDatabase(app).todoDao()
         repo = TodoRepository(dao)
+        allTodos = repo.allTodos
     }
 
     fun insert(todo: Todo) = viewModelScope.launch { repo.insert(todo) }
